@@ -31,7 +31,7 @@ import android.widget.RelativeLayout;
 import android.view.ViewGroup;
 
 @Keep
-public final class AdXBannerAdapter implements CustomEventBanner {
+public final class ADXBannerAdapter implements CustomEventBanner {
 
     private boolean _isInitialized;
     private AdView _bannerview;

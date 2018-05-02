@@ -22,7 +22,7 @@ import android.content.Context;
 import android.support.v4.media.session.PlaybackStateCompat;
 
 @Keep
-public final class AdXInterstitialAdapter implements CustomEventInterstitial{
+public final class ADXInterstitialAdapter implements CustomEventInterstitial{
 
     private InterstitialAd _interstitialAd;
     private String _unitId = "";
