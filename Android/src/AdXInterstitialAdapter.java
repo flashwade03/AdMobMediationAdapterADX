@@ -45,38 +45,51 @@ public final class ADXInterstitialAdapter implements CustomEventInterstitial{
 
     @Override
     public void showInterstitial() {
+        Log.v("ADXInterstitialAdatper", "showInterstitial");
         _interstitialAd.show();
     }
 
     @Override
     public void requestInterstitialAd(Context context, final CustomEventInterstitialListener listener, String serverParameter, MediationAdRequest mediationAdRequest, Bundle customEventExtras)  {
         this._unitId = serverParameter;
-        Log.v("Ads", "RequestInterstitialAd :: unitId : "+this._unitId);
+        Log.v("ADXInterstitialAdapter", "RequestInterstitialAd :: unitId : "+this._unitId);
         _interstitialAd = new InterstitialAd(context);
         _interstitialAd.setAdUnitId(this._unitId);
         _listener = new AdListener() {
             @Override
+            public void onAdClicked() {
+                Log.v("ADXInterstitialAdapter", "onAdClicked");
+                listener.onAdClicked();
+            }
+
+            @Override
             public void onAdLoaded() {
+                Log.v("ADXInterstitialAdapter", "onAdLoaded");
                 listener.onAdLoaded();
             }
 
             @Override
             public void onAdFailedToLoad(int errorCode) {
+                Log.v("ADXInterstitialAdapter", "onAdFailedToLoad");
                 listener.onAdFailedToLoad(errorCode);
             }
 
             @Override
             public void onAdOpened() {
+                Log.v("ADXInterstitialAdapter", "onAdOpened");
                 listener.onAdOpened();
             }
 
             @Override
             public void onAdLeftApplication() {
+                Log.v("ADXInterstitialAdapter", "onAdLeftApplication");
+                onAdClicked();
                 listener.onAdLeftApplication();
             }
 
             @Override
             public void onAdClosed() {
+                Log.v("ADXInterstitialAdapter", "onAdClosed");
                 listener.onAdClosed();
             }
         };

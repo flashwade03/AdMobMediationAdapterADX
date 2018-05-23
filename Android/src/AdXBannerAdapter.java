@@ -47,7 +47,7 @@ public final class ADXBannerAdapter implements CustomEventBanner {
                 if (_bannerview != null)
                     _bannerview.destroy();
                 else
-                    Log.v("Ads", "destroy::banner view is null");
+                    Log.v("ADXBannerAdapter", "destroy::banner view is null");
             }
         });
     }
@@ -66,39 +66,47 @@ public final class ADXBannerAdapter implements CustomEventBanner {
     public void requestBannerAd(final Context context, final CustomEventBannerListener listener, String serverParameter, final AdSize adsize, MediationAdRequest adRequest, Bundle mediationExtras) {
         activity = (Activity)context;
 
-        Log.v("Ads", "size : "+adsize.toString());
-        Log.v("Ads", "request::server parameter : "+serverParameter);
+        Log.v("ADXBannerAdapter", "size : "+adsize.toString());
+        Log.v("ADXBannerAdapter", "request::server parameter : "+serverParameter);
         String adunit = serverParameter;
 
         CustomEventBannerListener bannerlistener = listener;
         AdListener adListener = new AdListener(){
+
             @Override
             public void onAdFailedToLoad(int error) {
+                Log.v("ADXBannerAdapter", "onAdFailedToLoad");
                 listener.onAdFailedToLoad(error);
             }
 
             @Override
             public void onAdLoaded() {
+                Log.v("ADXBannerAdaper", "onAdLoaded");
                 listener.onAdLoaded(_bannerview);
             }
 
             @Override
             public void onAdLeftApplication() {
+                Log.v("ADXBannerAdapter", "onAdLeftApplication");
+                onAdClicked();
                 listener.onAdLeftApplication();
             }
 
             @Override
             public void onAdClicked() {
+                Log.v("ADXBannerAdapter", "onAdClicked");
                 listener.onAdClicked();
             }
 
             @Override
             public void onAdClosed() {
+                Log.v("ADXBannerAdapter", "onAdClosed");
                 listener.onAdClosed();
             }
 
             @Override
             public void onAdOpened() {
+                Log.v("ADXBannerAdapter", "onAdOpened");
                 listener.onAdOpened();
             }
         };
@@ -106,7 +114,7 @@ public final class ADXBannerAdapter implements CustomEventBanner {
         AdRequest request = new AdRequest.Builder().build();
         _bannerview = new AdView(context);
         if (_bannerview == null) {
-            Log.v("Ads", "request::bannerview is null");
+            Log.v("ADXBannerAdapter", "request::bannerview is null");
         }
 
         _bannerview.setAdUnitId(adunit);
@@ -114,7 +122,7 @@ public final class ADXBannerAdapter implements CustomEventBanner {
         int heightInPixels = adsize.getHeightInPixels(context);
         _bannerview.setAdSize(adsize);
         _bannerview.setAdListener(adListener);
-        Log.v("Ads", "AdUnit : "+adunit);
+        Log.v("ADXBannerAdapter", "AdUnit : "+adunit);
         _bannerview.loadAd(request);
 
     }
